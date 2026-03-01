@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 const LINKS = [
-  { name: 'DOCUMENTATION', url: 'https://github.com/MuhammadZaidan1/jay-next-dapp#readme' },
+  { name: 'DOCUMENTATION', url: 'https://github.com/MuhammadZaidan1/jay-next-dapps#readme' },
   { name: 'CORE CONTRACTS', url: 'https://github.com/MuhammadZaidan1/jay-hardhat-contracts' },
   { name: 'GITHUB', url: 'https://github.com/MuhammadZaidan1' },
   { name: 'LINKEDIN', url: 'https://www.linkedin.com/in/muhammad-zaidan-046872336/' }
