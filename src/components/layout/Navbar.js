@@ -72,7 +72,7 @@ export default function Navbar({ walletAddress, onConnect }) {
   };
 
   return (
-    <nav className="relative z-[100] border-b-4 border-black bg-white shadow-[0_4px_0_0_rgba(0,0,0,1)]">
+    <nav className="relative z-100 border-b-4 border-black bg-white shadow-[0_4px_0_0_rgba(0,0,0,1)]">
       {/* HEADER BAR */}
       <div className="relative z-20 flex items-center justify-between px-4 py-3 md:px-6 md:py-4 max-w-7xl mx-auto bg-white">
         

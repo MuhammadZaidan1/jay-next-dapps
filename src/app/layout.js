@@ -2,13 +2,13 @@ import "./globals.css";
 import { Toaster } from "sonner";
 
 export const metadata = {
-  title: "$JAY Swap | Digital Asset dApp",
+  title: "$JAY | Digital Asset dApp",
   description: "Neo-Brutalist single asset dApp experience for $JAY Token. Swap ETH to $JAY instantly via our secure vendor contract.",
   keywords: ["$JAY", "Token", "Web3", "dApp", "Crypto", "Ethereum", "Sepolia", "Neo-Brutalist", "React", "Next.js"],
   openGraph: {
-    title: "$JAY Swap | Digital Asset dApp",
+    title: "$JAY | Digital Asset dApp",
     description: "Join the $JAY ecosystem. Swap assets directly from the vendor contract with zero hidden fees.",
-    url: "https://jay-token-swap.vercel.app", 
+    url: "https://jay-dapps.vercel.app", 
     siteName: "$JAY Token",
     images: [
       {
