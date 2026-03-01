@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function HeroSection({ onConnect, walletAddress }) {
   return (
@@ -24,12 +25,19 @@ export default function HeroSection({ onConnect, walletAddress }) {
           </p>
         </div>
         {!walletAddress && (
-          <button
-            onClick={onConnect}
-            className="mt-8 md:mt-10 bg-black text-brand-yellow border-4 border-black px-8 py-3.5 md:px-10 md:py-4 font-black text-base md:text-lg uppercase tracking-widest shadow-brutal hover:bg-brand-yellow hover:text-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none"
-          >
-            INITIALIZE INTERFACE →
-          </button>
+          <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-4">
+            <button
+              onClick={onConnect}
+              className="bg-black text-brand-yellow border-4 border-black px-8 py-3.5 md:px-10 md:py-4 font-black text-base md:text-lg uppercase tracking-widest shadow-brutal hover:bg-brand-yellow hover:text-black transition-all active:translate-x-1 active:translate-y-1 active:shadow-none"
+            >
+              INITIALIZE INTERFACE →
+            </button>
+            <Link href="/guide">
+              <button className="bg-white text-black border-4 border-black px-8 py-3.5 md:px-10 md:py-4 font-black text-base md:text-lg uppercase tracking-widest shadow-brutal hover:bg-brand-pink hover:text-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none">
+                HOW TO START 📖
+              </button>
+            </Link>
+          </div>
         )}
       </div>
     </section>

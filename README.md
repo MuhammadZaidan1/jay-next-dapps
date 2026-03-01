@@ -16,7 +16,9 @@
   </a>
 </div>
 
+
 <br />
+
 
 <div align="center">
   <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-16.0-blue" alt="Next.js" /></a> &nbsp;
@@ -25,27 +27,59 @@
   <a href="https://vercel.com"><img src="https://img.shields.io/badge/Deploy%20on-Vercel-black" alt="Vercel" /></a>
 </div>
 
+
 ---
 
 ## 🎨 Neobrutalist UI Showcase
 
 > *Experience the raw, high-contrast, and bold Neobrutalist design language integrated with seamless Web3 interactions.*
 
-| Zero-Fee Token Swap Engine | Admin Vault & Protocol Metrics |
-| :---: | :---: |
-| <img src="./public/assets/swap-token.png" alt="Token Swap" width="100%" style="border: 3px solid black; border-radius: 4px;" /> | <img src="./public/assets/admin-page.png" alt="Admin Dashboard" width="100%" style="border: 3px solid black; border-radius: 4px;" /> |
-| **Homepage & Contract Verification** | **Custom 404 Error Page** |
-| <img src="./public/assets/home-page.png" alt="Homepage" width="100%" style="border: 3px solid black; border-radius: 4px;" /> | <img src="./public/assets/404-page.png" alt="404 Page" width="100%" style="border: 3px solid black; border-radius: 4px;" /> |
+<table width="100%">
+  <tr>
+    <td align="center" width="50%" rowspan="2" valign="top">
+      <b>Homepage & Contract Verification</b><br/><br/>
+      <img src="./public/assets/home-ss.png" alt="Homepage" style="border: 3px solid black; border-radius: 4px; width: 100%;" />
+    </td>
+    <td align="center" width="50%" valign="top">
+      <b>Zero-Fee Token Swap Engine</b><br/><br/>
+      <img src="./public/assets/swap-token.png" alt="Token Swap" style="border: 3px solid black; border-radius: 4px; width: 100%;" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <b>Admin Vault & Protocol Metrics</b><br/><br/>
+      <img src="./public/assets/admin-page.png" alt="Admin Dashboard" style="border: 3px solid black; border-radius: 4px; width: 100%;" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <b>Dedicated Onboarding Guide</b><br/><br/>
+      <img src="./public/assets/guide-page.jpeg" alt="Guide Page" style="border: 3px solid black; border-radius: 4px; width: 100%;" />
+    </td>
+    <td align="center" width="50%" valign="top">
+      <b>Custom 404 Error Page</b><br/><br/>
+      <img src="./public/assets/404-page.png" alt="404 Page" style="border: 3px solid black; border-radius: 4px; width: 100%;" />
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🚀 Seamless Web3 Onboarding Experience
+
+To ensure a frictionless onboarding process for both Web3 veterans and complete beginners, **$JAY.SYS Protocol** implements a highly optimized UX pipeline:
+
+- **📱 Smart Mobile Deep Linking:** Automatically detects mobile browsers (Safari/Chrome). Clicking `Connect Wallet` triggers a Universal Deep Link (`metamask.app.link`) to open the dApp securely inside the MetaMask in-app browser.
+- **🛍️ Store Fallbacks:** If no Web3 wallet is detected on a mobile device, the protocol intuitively falls back, routing users to the official iOS App Store or Google Play Store to install MetaMask.
+- **📖 Interactive Setup Guide:** A visually distinct `/guide` page explicitly built for Web3 beginners, offering step-by-step visual instructions on wallet installation and Sepolia Testnet configuration.
+- **🚰 Faucet Integration:** Built-in critical notices and direct routing to Sepolia Faucet services, ensuring users safely acquire test gas fees without real-world financial confusion.
 
 ---
 
 ## Project Overview
 
 “JAY Protocol – Interface” is the frontend for the $JAY Protocol dApp.  
-Built on Next.js 16 (App Router) with Tailwind CSS and Ethers.js v6, the UI
-embraces a Neo‑Brutalist design language: high‑contrast palettes, thick black
-borders, and brutal flat shadows. The experience is engineered to feel raw,
-instantaneous and completely free – every swap carries **zero fees**.
+Built on Next.js 16 (App Router) with Tailwind CSS and Ethers.js v6, the UI embraces a Neo‑Brutalist design language: high‑contrast palettes, thick black borders, and brutal flat shadows. The experience is engineered to feel raw, instantaneous and completely free – every swap carries **zero fees**.
 
 ---
 
@@ -53,55 +87,31 @@ instantaneous and completely free – every swap carries **zero fees**.
 
 ### User Features
 
-- **Zero‑fee Token Swap Engine** Fully client‑side swap interface (`src/components/web3/SwapToken.js`) with
-  ETH↔$JAY conversions via the Vendor contract. Mode toggle, gas‑reserve logic,
-  and toasts for every lifecycle event.
-
-- **One‑click “Add $JAY to MetaMask”** Navbar button uses `wallet_watchAsset` to push the token metadata straight into
-  the user’s wallet.
-
-- **Live Stats Section** Displays total fixed supply and network status. Includes link to
-  [Sepolia Etherscan](https://sepolia.etherscan.io) using
-  `JAY_TOKEN_ADDRESS` constant for quick verification.
-
-- **Custom Neobrutalist 404 Page** Stylized error screen (`src/app/not-found.js`) warns of missing blocks with
-  bold typography and a “Back to Mainnet” button.
+- **Zero‑fee Token Swap Engine:** Fully client‑side swap interface (`src/components/web3/SwapToken.js`) with ETH↔$JAY conversions via the Vendor contract. Mode toggle, gas‑reserve logic, and toasts for every lifecycle event.
+- **One‑click “Add $JAY to MetaMask”:** Navbar button uses `wallet_watchAsset` to push the token metadata straight into the user’s wallet.
+- **Live Stats Section:** Displays total fixed supply and network status. Includes link to [Sepolia Etherscan](https://sepolia.etherscan.io) using `JAY_TOKEN_ADDRESS` constant for quick verification.
+- **Custom Neobrutalist 404 Page:** Stylized error screen (`src/app/not-found.js`) warns of missing blocks with bold typography and a “Back to Mainnet” button.
 
 ### Advanced Web3 Data Integration
 
-- **Global Transaction Feed** Etherscan API call (see `TransactionHistory.js`) to fetch the latest protocol
-  activity.
-
-- **User‑Specific Transaction History** On‑chain lookup filtered by the connected wallet address; renders rows with
-  hashes and external links.
-
-- **Live Protocol Metrics & Network Indicators** Admin dashboard shows token rate, total supply, tokens sold, real‑time gas
-  price (via `provider.getFeeData()`), and a “Live_Network” indicator.
-
-- **Skeleton Loaders & Sonner Toasts** UX helpers for async operations; skeleton components appear during fetches and
-  `sonner` toasts provide rich, linked notifications for approvals, swaps, and
-  withdrawals.
+- **Global Transaction Feed:** Etherscan API call (see `TransactionHistory.js`) to fetch the latest protocol activity.
+- **User‑Specific Transaction History:** On‑chain lookup filtered by the connected wallet address; renders rows with hashes and external links.
+- **Live Protocol Metrics & Network Indicators:** Admin dashboard shows token rate, total supply, tokens sold, real‑time gas price (via `provider.getFeeData()`), and a “Live_Network” indicator.
+- **Skeleton Loaders & Sonner Toasts:** UX helpers for async operations; skeleton components appear during fetches and `sonner` toasts provide rich, linked notifications for approvals, swaps, and withdrawals.
 
 ### Admin Vault & Security Layer
 
-- **Admin Dashboard** (`src/app/admin/page.js`)  
-  Authenticated owner interface guarded by wallet address check. Features
-  “Withdraw ETH” and “Withdraw Tokens” actions that call vendor contract
-  methods with transaction toasts and error handling.
-
-- **Security Layer** Conditional rendering prevents non‑owners from accessing admin pages and
-  displays an “ACCESS DENIED” screen with stylized alerts.
+- **Admin Dashboard** (`src/app/admin/page.js`): Authenticated owner interface guarded by wallet address check. Features “Withdraw ETH” and “Withdraw Tokens” actions that call vendor contract methods with transaction toasts and error handling.
+- **Security Layer:** Conditional rendering prevents non‑owners from accessing admin pages and displays an “ACCESS DENIED” screen with stylized alerts.
 
 ### Robust Custom Hook
 
-- **`useWeb3`** (`src/hooks/useWeb3.js`)  
-  Encapsulates wallet connection, account/chain state, and network enforcement.
-
+- **`useWeb3`** (`src/hooks/useWeb3.js`): Encapsulates wallet connection, account/chain state, and network enforcement.
   - Detects `window.ethereum` and requests accounts.
-  - Automatically switches/ adds Sepolia (`0xaa36a7`) using
-    `wallet_switchEthereumChain` and handles errors.
+  - **Executes mobile detection and Universal Deep Linking** for seamless app redirection.
+  - **Handles Store Fallbacks** for users missing wallet extensions/apps.
+  - Automatically switches/adds Sepolia (`0xaa36a7`) using `wallet_switchEthereumChain` and handles errors.
   - Exposes `account`, `chainId`, and `connectWallet` for components.
-  - Provides helper `switchToSepolia` with toast feedback on failures.
 
 ---
 
@@ -109,17 +119,10 @@ instantaneous and completely free – every swap carries **zero fees**.
 
 The codebase is modular and client‑centric:
 
-- **App Folder (`src/app/`)** Root layout with global styles, metadata and a global `<Toaster />`. Home and
-  admin pages import composable UI/web3 components.
-
-- **Components** Split into `layout`, `ui`, `web3`, and `admin` directories. Each component
-  follows the neo‑brutalist CSS conventions (Tailwind utilities).
-
-- **Constants & Contracts** All addresses and ABIs live in `src/constants/index.js` (e.g.
-  `JAY_TOKEN_ADDRESS`, `VENDOR_ADDRESS`, `VendorABI`, `JayTokenABI`).
-
-- **Web3 Helpers** `getReadProvider()` utility in `SwapToken.js` and repeated provider/signer
-  instantiation patterns ensure DRY integration.
+- **App Folder (`src/app/`)**: Root layout with global styles, metadata and a global `<Toaster />`. Home and admin pages import composable UI/web3 components.
+- **Components**: Split into `layout`, `ui`, `web3`, and `admin` directories. Each component follows the neo‑brutalist CSS conventions (Tailwind utilities).
+- **Constants & Contracts**: All addresses and ABIs live in `src/constants/index.js` (e.g. `JAY_TOKEN_ADDRESS`, `VENDOR_ADDRESS`, `VendorABI`, `JayTokenABI`).
+- **Web3 Helpers**: `getReadProvider()` utility in `SwapToken.js` and repeated provider/signer instantiation patterns ensure DRY integration.
 
 ---
 
@@ -127,7 +130,7 @@ The codebase is modular and client‑centric:
 
 ```bash
 # clone the repository
-git clone [https://github.com/](https://github.com/)<your-org>/jay-token-dapps.git
+git clone https://github.com/<your-org>/jay-token-dapps.git
 cd jay-token-dapps
 
 # install dependencies

@@ -10,7 +10,7 @@ import RoadmapSection   from '@/components/ui/RoadmapSection';
 import TokenomicsSection from '@/components/ui/TokenomicsSection';
 import JoinCommunitySection from '@/components/ui/JoinCommunitySection';
 import Footer           from '@/components/layout/Footer';
-import SwapToken from '@/components/web3/SwapToken';
+import SwapToken        from '@/components/web3/SwapToken';
 import TransactionHistory from '@/components/web3/TransactionHistory';
 
 export default function HomePage() {
@@ -19,7 +19,6 @@ export default function HomePage() {
   const handleSwapSuccess = () => {
     setRefreshTrigger(prev => prev + 1);
   };
-
   return (
     <div className="min-h-screen font-sans selection:bg-brand-yellow relative overflow-x-hidden">
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -40,7 +39,7 @@ export default function HomePage() {
         />
       </div>
       <div className="max-w-350 mx-auto flex flex-col gap-6 md:gap-12 p-4 md:p-10 relative z-10">
-        <header className="border-4 border-black shadow-brutal bg-white">
+        <header className="relative z-50 border-4 border-black shadow-brutal bg-white transition-all">
           <Navbar walletAddress={account} onConnect={connectWallet} />
         </header>
         <main className="flex flex-col gap-6 md:gap-12">

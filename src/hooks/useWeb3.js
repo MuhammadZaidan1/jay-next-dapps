@@ -4,7 +4,6 @@ import { ethers } from 'ethers';
 import { toast } from 'sonner';
 
 const SEPOLIA_CHAIN_ID = '0xaa36a7'; 
-
 export const useWeb3 = () => {
     const [account, setAccount] = useState(null);
     const [chainId, setChainId] = useState(null);
@@ -40,9 +39,21 @@ export const useWeb3 = () => {
         }
     };
     const connectWallet = useCallback(async () => {
-        if (typeof window === 'undefined' || !window.ethereum) {
-            toast.error("Web3 wallet not detected. Please install MetaMask. 🦊");
-            return;
+        if (typeof window === 'undefined') return;
+        if (!window.ethereum) {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                const dappUrl = window.location.host;
+                const deepLink = `https://metamask.app.link/dapp/${dappUrl}`;
+                toast.loading('Redirecting to MetaMask App... 🦊');
+                setTimeout(() => {
+                    window.location.href = deepLink;
+                }, 1000);
+                return;
+            } else {
+                toast.error("Web3 wallet not detected. Please install MetaMask. 🦊");
+                return;
+            }
         }        
         try {
             const provider = new ethers.BrowserProvider(window.ethereum);
