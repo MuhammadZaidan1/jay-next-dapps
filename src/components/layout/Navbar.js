@@ -3,13 +3,15 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Copy, ShieldCheck } from 'lucide-react';
+import { Copy, ShieldCheck, Menu, X, PlusCircle, Wallet } from 'lucide-react';
 import { toast } from 'sonner';
 import { ethers } from 'ethers';
 import { VENDOR_ADDRESS, VendorABI, JAY_TOKEN_ADDRESS } from '@/constants';
 
 export default function Navbar({ walletAddress, onConnect }) {
   const [isOwner, setIsOwner] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   useEffect(() => {
     const checkOwnerStatus = async () => {
       if (!walletAddress) {
@@ -31,15 +33,16 @@ export default function Navbar({ walletAddress, onConnect }) {
     };
     checkOwnerStatus();
   }, [walletAddress]);
+
   const addTokenToMetaMask = async () => {
     if (!window.ethereum) {
-      toast.error('Web3 Wallet extension required.');
+      toast.error('Web3 Wallet required.');
       return;
     }
     try {
       const baseUrl = window.location.origin; 
       const logoUrl = `${baseUrl}/assets/logo-token.png`; 
-      const wasAdded = await window.ethereum.request({
+      await window.ethereum.request({
         method: 'wallet_watchAsset',
         params: {
           type: 'ERC20', 
@@ -51,87 +54,127 @@ export default function Navbar({ walletAddress, onConnect }) {
           },
         },
       });
-      if (wasAdded) {
-        toast.success('$JAY Asset integrated successfully.');
-      } else {
-        toast.info('Token integration cancelled.');
-      }
+      setIsMenuOpen(false);
     } catch (error) {
-      console.error(error);
-      toast.error('Failed to import asset to wallet.');
+      toast.error('Import failed.');
     }
   };
+
   const short = walletAddress
     ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
     : null;
+
   const copyAddress = () => {
     if (walletAddress) {
       navigator.clipboard.writeText(walletAddress);
-      toast.success('Wallet address copied.');
+      toast.success('Address copied!');
     }
   };
+
   return (
-    <nav className="relative flex items-center justify-between px-4 md:px-6 py-4 bg-white overflow-hidden border-b-4 border-black">
-      <div 
-        className="absolute inset-0 opacity-[0.3] pointer-events-none z-0" 
-        style={{
-          backgroundImage: 'repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%)',
-          backgroundSize: '20px 20px'
-        }}
-      ></div>
-      <Link href="/" className="relative z-10">
-        <div className="bg-white border-4 border-black px-2 py-1 flex items-center gap-2 shadow-brutal hover:bg-brand-pink hover:text-white transition-all cursor-pointer group">
-          <Image 
-            src="/assets/logo-token.png" 
-            alt="$JAY Protocol"
-            width={40}  
-            height={40} 
-            className="object-contain group-hover:rotate-12 transition-transform" 
-            priority 
-          />
-          <span className="font-black text-xl md:text-2xl tracking-tighter uppercase italic">
-            $JAY<span className="text-brand-pink group-hover:text-white">.</span>SYS
-          </span>
-        </div>
-      </Link>
-      <div className="relative z-10 flex items-center gap-2 md:gap-4">
-        {walletAddress && (
-          <button 
-            onClick={addTokenToMetaMask}
-            className="hidden md:flex items-center gap-1 bg-white text-black border-4 border-black px-2 py-2 font-black text-[10px] md:text-xs uppercase shadow-brutal hover:bg-brand-yellow hover:-translate-y-1 transition-all"
-            title="Import $JAY to Wallet"
-          >
-            🦊 <span className="ml-1">Add $JAY</span>
-          </button>
-        )}
-        {isOwner && (
-          <Link href="/admin">
-            <button className="flex items-center gap-2 bg-black text-brand-yellow border-4 border-black px-3 md:px-4 py-2 font-black text-[10px] md:text-xs uppercase shadow-brutal hover:bg-brand-pink hover:text-white transition-all">
-              <ShieldCheck size={16} strokeWidth={3} />
-              <span className="hidden md:inline">Admin Portal</span>
-            </button>
-          </Link>
-        )}
-        {short ? (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={copyAddress}
-              className="flex items-center gap-2 bg-brand-cyan text-black border-4 border-black px-4 py-2.5 font-mono text-xs md:text-sm font-black shadow-brutal hover:bg-white transition-all active:translate-x-1 active:translate-y-1 active:shadow-none"
-            >
-              <Copy size={14} />
-              <span className="hidden sm:inline">{short}</span>
-              <span className="sm:hidden font-black">COPY</span>
-            </button>
+    <nav className="relative z-[100] border-b-4 border-black bg-white shadow-[0_4px_0_0_rgba(0,0,0,1)]">
+      {/* HEADER BAR */}
+      <div className="relative z-20 flex items-center justify-between px-4 py-3 md:px-6 md:py-4 max-w-7xl mx-auto bg-white">
+        
+        {/* LOGO */}
+        <Link href="/" className="shrink-0">
+          <div className="bg-white border-4 border-black px-2 py-1 flex items-center gap-2 shadow-brutal hover:bg-brand-pink hover:text-white transition-all group">
+            <Image 
+              src="/assets/logo-token.png" 
+              alt="$JAY"
+              width={32} height={32}
+              className="w-8 h-8 md:w-10 md:h-10 group-hover:rotate-12 transition-transform" 
+              priority 
+            />
+            <span className="font-black text-lg md:text-2xl tracking-tighter italic uppercase">
+              $JAY<span className="text-brand-pink group-hover:text-white">.</span>SYS
+            </span>
           </div>
-        ) : (
-          <button
-            onClick={onConnect}
-            className="bg-brand-yellow text-brand-black border-4 border-black px-4 md:px-8 py-3 font-black text-xs md:text-base uppercase tracking-tight shadow-brutal hover:bg-black hover:text-brand-yellow transition-all active:translate-x-1 active:translate-y-1 active:shadow-none"
+        </Link>
+
+        {/* DESKTOP NAV (lg+) */}
+        <div className="hidden lg:flex items-center gap-4">
+          {walletAddress && (
+            <button onClick={addTokenToMetaMask} className="flex items-center gap-2 bg-white border-4 border-black px-3 py-2 font-black text-xs uppercase shadow-brutal hover:bg-brand-yellow transition-all">
+              🦊 Add Token
+            </button>
+          )}
+          {isOwner && (
+            <Link href="/admin">
+              <button className="flex items-center gap-2 bg-black text-brand-yellow border-4 border-black px-4 py-2 font-black text-xs uppercase shadow-brutal hover:bg-brand-pink transition-all">
+                <ShieldCheck size={16} /> Admin
+              </button>
+            </Link>
+          )}
+          {short ? (
+            <button onClick={copyAddress} className="flex items-center gap-2 bg-brand-cyan border-4 border-black px-4 py-2 font-mono text-sm font-black shadow-brutal hover:bg-white transition-all">
+              <Copy size={14} /> {short}
+            </button>
+          ) : (
+            <button onClick={onConnect} className="bg-brand-yellow border-4 border-black px-6 py-2 font-black text-sm uppercase shadow-brutal hover:bg-black hover:text-brand-yellow transition-all">
+              Connect Wallet
+            </button>
+          )}
+        </div>
+
+        {/* MOBILE CONTROLS (lg hidden) */}
+        <div className="lg:hidden flex items-center gap-2">
+          {!walletAddress && (
+             <button onClick={onConnect} className="bg-brand-yellow border-4 border-black px-3 py-1.5 font-black text-[10px] uppercase shadow-brutal">
+               Connect
+             </button>
+          )}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="bg-white border-4 border-black p-1.5 shadow-brutal transition-all active:shadow-none active:translate-x-1 active:translate-y-1"
           >
-            Connect Wallet
+            {isMenuOpen ? <X size={24} strokeWidth={3} /> : <Menu size={24} strokeWidth={3} />}
           </button>
-        )}
+        </div>
       </div>
+
+      {/* MOBILE DROWER MENU */}
+      {isMenuOpen && (
+        <div className="lg:hidden absolute top-[calc(100%-4px)] left-0 w-full bg-white border-b-4 border-black p-4 space-y-3 z-10 shadow-[0_10px_0_0_rgba(0,0,0,0.1)] animate-in slide-in-from-top duration-200">
+          
+          {/* Alamat Wallet di Mobile Pindah Sini */}
+          {short && (
+            <button 
+              onClick={copyAddress}
+              className="w-full flex items-center justify-between bg-brand-cyan border-4 border-black p-4 font-black text-sm shadow-brutal"
+            >
+              <div className="flex items-center gap-2">
+                <Wallet size={18} />
+                <span className="font-mono">{short}</span>
+              </div>
+              <Copy size={18} />
+            </button>
+          )}
+
+          {walletAddress && (
+            <button 
+              onClick={addTokenToMetaMask}
+              className="w-full flex items-center justify-between bg-white border-4 border-black p-4 font-black text-sm uppercase shadow-brutal"
+            >
+              <span>Add $JAY to Wallet</span>
+              <PlusCircle size={20} />
+            </button>
+          )}
+
+          {isOwner && (
+            <Link href="/admin" onClick={() => setIsMenuOpen(false)} className="block">
+              <button className="w-full flex items-center justify-between bg-black text-brand-yellow border-4 border-black p-4 font-black text-sm uppercase shadow-brutal">
+                <span>Admin Portal</span>
+                <ShieldCheck size={20} />
+              </button>
+            </Link>
+          )}
+
+          <div className="pt-2 text-center font-mono text-[9px] text-black/40 font-black tracking-widest uppercase">
+            — JAY Protocol System v1.0 —
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
