@@ -57,7 +57,6 @@ export default function JoinCommunitySection() {
         </div>
       </div>
       <div className="bg-brand-black text-white relative overflow-hidden">
-        {/* DIAGONAL DECORATION */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" 
           style={{ backgroundImage: 'repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 10%)', backgroundSize: '20px 20px' }}>
         </div>

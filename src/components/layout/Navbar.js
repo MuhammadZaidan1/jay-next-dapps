@@ -11,7 +11,6 @@ import { VENDOR_ADDRESS, VendorABI, JAY_TOKEN_ADDRESS } from '@/constants';
 export default function Navbar({ walletAddress, onConnect }) {
   const [isOwner, setIsOwner] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   useEffect(() => {
     const checkOwnerStatus = async () => {
       if (!walletAddress) {
@@ -33,7 +32,6 @@ export default function Navbar({ walletAddress, onConnect }) {
     };
     checkOwnerStatus();
   }, [walletAddress]);
-
   const addTokenToMetaMask = async () => {
     if (!window.ethereum) {
       toast.error('Web3 Wallet required.');
@@ -59,24 +57,18 @@ export default function Navbar({ walletAddress, onConnect }) {
       toast.error('Import failed.');
     }
   };
-
   const short = walletAddress
     ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
     : null;
-
   const copyAddress = () => {
     if (walletAddress) {
       navigator.clipboard.writeText(walletAddress);
       toast.success('Address copied!');
     }
   };
-
   return (
     <nav className="relative z-100 border-b-4 border-black bg-white shadow-[0_4px_0_0_rgba(0,0,0,1)]">
-      {/* HEADER BAR */}
       <div className="relative z-20 flex items-center justify-between px-4 py-3 md:px-6 md:py-4 max-w-7xl mx-auto bg-white">
-        
-        {/* LOGO */}
         <Link href="/" className="shrink-0">
           <div className="bg-white border-4 border-black px-2 py-1 flex items-center gap-2 shadow-brutal hover:bg-brand-pink hover:text-white transition-all group">
             <Image 
@@ -91,8 +83,6 @@ export default function Navbar({ walletAddress, onConnect }) {
             </span>
           </div>
         </Link>
-
-        {/* DESKTOP NAV (lg+) */}
         <div className="hidden lg:flex items-center gap-4">
           {walletAddress && (
             <button onClick={addTokenToMetaMask} className="flex items-center gap-2 bg-white border-4 border-black px-3 py-2 font-black text-xs uppercase shadow-brutal hover:bg-brand-yellow transition-all">
@@ -116,13 +106,11 @@ export default function Navbar({ walletAddress, onConnect }) {
             </button>
           )}
         </div>
-
-        {/* MOBILE CONTROLS (lg hidden) */}
         <div className="lg:hidden flex items-center gap-2">
           {!walletAddress && (
-             <button onClick={onConnect} className="bg-brand-yellow border-4 border-black px-3 py-1.5 font-black text-[10px] uppercase shadow-brutal">
-               Connect
-             </button>
+            <button onClick={onConnect} className="bg-brand-yellow border-4 border-black px-3 py-1.5 font-black text-[10px] uppercase shadow-brutal">
+              Connect
+            </button>
           )}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -132,12 +120,8 @@ export default function Navbar({ walletAddress, onConnect }) {
           </button>
         </div>
       </div>
-
-      {/* MOBILE DROWER MENU */}
       {isMenuOpen && (
         <div className="lg:hidden absolute top-[calc(100%-4px)] left-0 w-full bg-white border-b-4 border-black p-4 space-y-3 z-10 shadow-[0_10px_0_0_rgba(0,0,0,0.1)] animate-in slide-in-from-top duration-200">
-          
-          {/* Alamat Wallet di Mobile Pindah Sini */}
           {short && (
             <button 
               onClick={copyAddress}
@@ -150,7 +134,6 @@ export default function Navbar({ walletAddress, onConnect }) {
               <Copy size={18} />
             </button>
           )}
-
           {walletAddress && (
             <button 
               onClick={addTokenToMetaMask}
@@ -160,7 +143,6 @@ export default function Navbar({ walletAddress, onConnect }) {
               <PlusCircle size={20} />
             </button>
           )}
-
           {isOwner && (
             <Link href="/admin" onClick={() => setIsMenuOpen(false)} className="block">
               <button className="w-full flex items-center justify-between bg-black text-brand-yellow border-4 border-black p-4 font-black text-sm uppercase shadow-brutal">
@@ -169,7 +151,6 @@ export default function Navbar({ walletAddress, onConnect }) {
               </button>
             </Link>
           )}
-
           <div className="pt-2 text-center font-mono text-[9px] text-black/40 font-black tracking-widest uppercase">
             — JAY Protocol System v1.0 —
           </div>

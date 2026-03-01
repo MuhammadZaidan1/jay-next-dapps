@@ -10,7 +10,6 @@ import RoadmapSection   from '@/components/ui/RoadmapSection';
 import TokenomicsSection from '@/components/ui/TokenomicsSection';
 import JoinCommunitySection from '@/components/ui/JoinCommunitySection';
 import Footer           from '@/components/layout/Footer';
-
 import SwapToken from '@/components/web3/SwapToken';
 import TransactionHistory from '@/components/web3/TransactionHistory';
 
@@ -52,8 +51,8 @@ export default function HomePage() {
             <StatsSection />
           </div>
         </main>
-        <section className="flex justify-center py-6 md:py-10">
-          <div className="w-full max-w-xl flex flex-col gap-6"> 
+        <section className="flex justify-center py-2 md:py-2">
+          <div className="w-full max-w-xl flex flex-col gap-2"> 
             <SwapToken 
               walletAddress={account} 
               onConnect={connectWallet} 

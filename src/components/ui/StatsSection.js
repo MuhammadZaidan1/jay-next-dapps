@@ -11,10 +11,7 @@ export default function StatsSection() {
   };
 
   return (
-    // Tambahin overflow-hidden di paling luar buat jaga-jaga parentnya bocor
     <div className="grid grid-cols-1 md:grid-cols-2 w-full border-t-4 border-black overflow-hidden bg-black">
-      
-      {/* SEKSI TOTAL SUPPLY */}
       <div className="border-b-4 md:border-b-0 md:border-r-4 border-black px-5 py-10 md:px-8 md:py-12 flex flex-col justify-center bg-white min-w-0">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shrink-0" />
@@ -22,14 +19,11 @@ export default function StatsSection() {
             Total Fixed Supply
           </p>
         </div>
-        
-        {/* FIX TOTAL: Pakai hyphens-auto dan word-break biar angka nol-nya mau turun ke bawah kalau gak muat */}
         <div className="w-full">
             <p className="font-black text-4xl sm:text-5xl md:text-6xl text-black leading-[0.8] tracking-tighter md:italic wrap-break-word [word-break:break-word] hyphens-auto">
                 1,000,000,000
             </p>
         </div>
-
         <a
           href={`https://sepolia.etherscan.io/address/${JAY_TOKEN_ADDRESS}`}
           target="_blank"
@@ -39,20 +33,15 @@ export default function StatsSection() {
           <ExternalLink size={14} /> VERIFIED_CONTRACT_SOURCE
         </a>
       </div>
-
-      {/* SEKSI CONTRACT IDENTIFIER */}
       <div className="px-5 py-10 md:px-8 md:py-12 flex flex-col justify-center bg-gray-50 min-w-0">
         <p className="font-mono text-[10px] text-black/50 uppercase tracking-widest mb-3 font-black">
           Smart Contract Identifier
         </p>
-        
-        {/* Pakai p-2 aja biar gak terlalu sempit di mobile */}
         <div className="bg-black/5 p-2 border-l-4 border-black mb-8">
             <p className="font-mono text-[10px] xs:text-xs sm:text-sm md:text-base font-black text-black break-all leading-tight tracking-tight">
                 {JAY_TOKEN_ADDRESS}
             </p> 
         </div>       
-
         <div className="flex flex-col sm:flex-row gap-4">
           <button 
             onClick={copyContract}
